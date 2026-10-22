@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Central Psicopedagógica — biblioteca digital da Apostila Completa de Avaliação e Intervenção Psicopedagógica 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  /* reset base (padrão web; equivale ao que o preview injetava) */
+  html,body{margin:0}
+  :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Central Psicopedagógica</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!--
+  ============================================================
+  CENTRAL PSICOPEDAGÓGICA — Biblioteca digital premium (dark)
+  Produto: "Apostila Completa de Avaliação e Intervenção
+  Psicopedagógica 2026". SPA mobile-first, fiel ao raio-x.
+  Dois níveis de acesso: Apostila (R$10) e Combo (R$27,97).
+  ------------------------------------------------------------
+  ILUSTRAÇÕES 3D (arquivos locais publicados junto da página):
+    img/banner.png       -> banner principal (Home)
+    img/apostila.png     -> Apostila Completa
+    img/guia.png         -> Guia Prático 2026
+    img/kit.png          -> Kit Visual
+    img/drive.png        -> Drive Profissional
+    img/atividades.png   -> 1500 Atividades
+    img/jogos.png        -> 20 Jogos
+    img/bonus.png        -> Bônus Extras
+
+  >>> O QUE TROCAR ANTES DE IR AO AR:
+   - LINKS DE DOWNLOAD: cada material tem `file: null`.
+     Procure por  // COLAR LINK REAL AQUI  e por  data-arquivo
+   - PLANO DO USUÁRIO: escolhido em "Conta" e salvo no navegador
+     (placeholder). Troque por integração real de acesso/login.
+   - ITENS "NÃO IDENTIFICADO": 20 Jogos, metadados do Kit Visual,
+     separação das 1.500 atividades. Marcados com <!-- TROCAR -->.
+  ============================================================
+-->
+<style>
+  /* ---- Layout: app shell dark premium, telas (SPA), barra inferior no mobile ---- */
+  /* ---- Paleta: azul-marinho / roxo / pervinca + menta e dourado (tema único, dark) ---- */
+  :root{
+    --bg:#0C0E24;
+    --bg-2:#111436;
+    --glow-purple:#3a2d7a;
+    --surface:#181B3E;        /* cards */
+    --surface-2:#1E2250;      /* blocos internos */
+    --surface-hi:rgba(255,255,255,.035);
+    --border:rgba(170,178,255,.12);
+    --border-hi:rgba(140,150,255,.34);
+    --fg:#EEF0FF;
+    --fg-soft:#C6C9F0;
+    --muted:#8B90C4;
+    --primary:#8B90F8;        /* azul-pervinca */
+    --primary-2:#6C72F0;
+    --primary-soft:rgba(124,131,243,.14);
+    --purple:#7A5CF0;
+    --lavender:#B9B5F5;
+    --mint:#5BE0AD;           /* verde-menta */
+    --mint-soft:rgba(91,224,173,.14);
+    --gold:#F3C56C;           /* dourado suave */
+    --gold-soft:rgba(243,197,108,.14);
+    --grad-cta:linear-gradient(135deg,#8B90F8,#6C5CE7);
+    --shadow:0 2px 6px rgba(0,0,0,.35), 0 18px 44px rgba(0,0,0,.42);
+    --shadow-hover:0 4px 10px rgba(0,0,0,.4), 0 26px 60px rgba(72,60,180,.4);
+    --radius:20px;
+    --radius-sm:13px;
+    --maxw:1120px;
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    color:var(--fg);
+    background:
+      radial-gradient(1200px 680px at 78% -8%, rgba(108,92,231,.26), transparent 60%),
+      radial-gradient(900px 560px at 8% 4%, rgba(91,224,173,.08), transparent 55%),
+      linear-gradient(180deg,#0C0E24 0%, #0B0D20 60%, #0A0C1C 100%);
+    background-attachment:fixed;
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+    padding-bottom:86px;
+  }
+  h1,h2,h3,h4{font-family:"Plus Jakarta Sans","Inter",sans-serif; color:var(--fg); margin:0; text-wrap:balance; letter-spacing:-.015em}
+  a{color:inherit}
+  button{font-family:inherit; color:inherit}
+  img{max-width:100%}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+  ::selection{background:rgba(139,144,248,.35)}
+
+  /* ---- Band acima do header (safe-area) ---- */
+  body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:60; background:#0C0E24}
+
+  /* ---- Header ---- */
+  header.app{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background:rgba(12,14,36,.72); backdrop-filter:saturate(1.4) blur(14px); border-bottom:1px solid var(--border)}
+  .head-row{display:flex; align-items:center; gap:12px; height:62px}
+  .brand{display:flex; align-items:center; gap:11px; cursor:pointer; background:none; border:0; padding:0; min-width:0}
+  .brand .mark{width:36px; height:36px; border-radius:11px; background:var(--grad-cta); display:grid; place-items:center; color:#fff; flex:none; box-shadow:0 6px 18px rgba(108,92,231,.45)}
+  .brand .mark svg{width:20px; height:20px}
+  .brand .txt{display:flex; flex-direction:column; line-height:1.12; min-width:0}
+  .brand .txt b{font-family:"Plus Jakarta Sans",sans-serif; font-size:15px; font-weight:800; letter-spacing:-.02em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .brand .txt span{font-size:11px; color:var(--muted)}
+  .head-spacer{flex:1}
+  .iconbtn{width:42px; height:42px; border-radius:12px; border:1px solid var(--border); background:var(--surface); color:var(--fg-soft); display:grid; place-items:center; cursor:pointer; transition:.16s}
+  .iconbtn:hover{border-color:var(--border-hi); color:var(--primary); transform:translateY(-1px)}
+  .iconbtn svg{width:20px; height:20px}
+  .plan-chip{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700; padding:7px 12px; border-radius:999px; background:var(--primary-soft); color:var(--primary); border:1px solid var(--border); white-space:nowrap}
+  .plan-chip.combo{background:var(--gold-soft); color:var(--gold); border-color:rgba(243,197,108,.3)}
+  .plan-chip svg{width:13px;height:13px}
+
+  /* ---- Screens ---- */
+  .screen{display:none}
+  .screen.active{display:block; animation:fade .34s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  section.block{padding-block:20px}
+
+  /* ---- Banner (Home) ---- */
+  .banner{display:block; width:100%; border:0; padding:0; cursor:pointer; position:relative; border-radius:24px; overflow:hidden; background:linear-gradient(180deg,#14163a,#0f1230); box-shadow:var(--shadow); border:1px solid var(--border); transition:transform .25s, box-shadow .25s, border-color .25s}
+  .banner:hover{transform:translateY(-2px); box-shadow:var(--shadow-hover); border-color:var(--border-hi)}
+  .banner:focus-visible{outline:2px solid var(--primary); outline-offset:3px}
+  .banner img{display:block; width:100%; height:auto; object-fit:contain}
+  .banner .cue{position:absolute; right:14px; bottom:14px; display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:#fff; background:rgba(16,18,44,.6); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.14); padding:8px 13px; border-radius:999px; opacity:.9; transition:.2s}
+  .banner:hover .cue{opacity:1; transform:translateX(2px)}
+  .banner .cue svg{width:15px;height:15px}
+  @media (max-width:600px){ .banner .cue{display:none} }
+
+  /* ---- Search ---- */
+  .searchbar{display:flex; align-items:center; gap:11px; background:var(--surface); border:1px solid var(--border); border-radius:15px; padding:13px 15px; box-shadow:var(--shadow)}
+  .searchbar:focus-within{border-color:var(--border-hi); box-shadow:0 0 0 3px var(--primary-soft)}
+  .searchbar svg{width:20px; height:20px; color:var(--muted); flex:none}
+  .searchbar input{border:0; outline:0; background:none; flex:1; font-size:15px; color:var(--fg); min-width:0}
+  .searchbar input::placeholder{color:var(--muted)}
+
+  /* ---- Section headings ---- */
+  .sec-head{display:flex; align-items:end; justify-content:space-between; gap:12px; margin:2px 0 14px}
+  .sec-head h2{font-size:20px; font-weight:800}
+  .sec-head p{margin:3px 0 0; color:var(--muted); font-size:13px}
+  .kicker{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--primary)}
+
+  /* ---- Comece por aqui ---- */
+  .start{position:relative; overflow:hidden; width:100%; text-align:left; border:1px solid var(--border-hi); color:#fff; border-radius:var(--radius); padding:22px; cursor:pointer;
+    background:linear-gradient(130deg, rgba(124,131,243,.9), rgba(108,92,231,.85) 55%, rgba(90,70,200,.85));
+    box-shadow:0 18px 44px rgba(76,62,170,.4); transition:transform .22s, box-shadow .22s}
+  .start:hover{transform:translateY(-2px); box-shadow:0 24px 56px rgba(76,62,170,.5)}
+  .start:focus-visible{outline:2px solid #fff; outline-offset:3px}
+  .start .orb{position:absolute; width:180px; height:180px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.22),transparent 70%); right:-50px; top:-60px}
+  .start .orb2{position:absolute; width:120px; height:120px; border-radius:50%; background:radial-gradient(circle,rgba(91,224,173,.3),transparent 70%); right:90px; bottom:-60px}
+  .start h3{color:#fff; font-size:20px; font-weight:800; position:relative}
+  .start p{margin:8px 0 16px; color:rgba(255,255,255,.92); max-width:48ch; font-size:14px; position:relative}
+  .btn-white{display:inline-flex; align-items:center; gap:8px; background:#fff; color:#4733b8; border:0; border-radius:12px; padding:12px 18px; font-weight:800; font-size:14px; box-shadow:0 8px 20px rgba(0,0,0,.22); position:relative}
+  .btn-white svg{width:17px;height:17px}
+
+  /* ---- Finder ("O que você precisa hoje?") ---- */
+  .finder{background:linear-gradient(160deg, rgba(243,197,108,.08), var(--surface) 42%); border:1px solid var(--border); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+  .finder h3{font-size:17px; font-weight:800}
+  .finder p{margin:4px 0 14px; color:var(--muted); font-size:13px}
+  .finder-grid{display:grid; gap:10px; grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .finder-btn{display:flex; align-items:center; gap:11px; text-align:left; background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:13px; cursor:pointer; transition:.18s; font-size:13.5px; font-weight:600; color:var(--fg)}
+  .finder-btn:hover{border-color:var(--border-hi); transform:translateY(-2px); background:#242963}
+  .finder-btn .fi{width:36px; height:36px; border-radius:11px; background:var(--primary-soft); color:var(--primary); display:grid; place-items:center; flex:none}
+  .finder-btn .fi svg{width:19px;height:19px}
+
+  /* ---- Library grid + rich cards ---- */
+  .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+  @media (max-width:520px){ .grid{grid-template-columns:repeat(2,1fr); gap:12px} }
+  @media (max-width:360px){ .grid{grid-template-columns:1fr} }
+
+  .lib-card{position:relative; text-align:left; border:1px solid var(--border); border-radius:var(--radius); cursor:pointer; overflow:hidden; background:var(--surface); box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .2s, box-shadow .2s, border-color .2s; animation:rise .5s ease backwards}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+  .lib-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:var(--border-hi)}
+  .lib-card:focus-visible{outline:2px solid var(--primary); outline-offset:2px}
+  .lib-card .thumb{position:relative; height:138px; display:grid; place-items:center; overflow:hidden}
+  .lib-card .thumb::before{content:""; position:absolute; inset:0; background:radial-gradient(130px 120px at 50% 42%, var(--acc-glow), transparent 72%)}
+  .lib-card .thumb img{position:relative; max-height:108px; width:auto; max-width:78%; object-fit:contain; filter:drop-shadow(0 12px 20px rgba(0,0,0,.4)); transition:transform .28s ease}
+  .lib-card:hover .thumb img{transform:scale(1.07) translateY(-2px)}
+  @media (max-width:520px){ .lib-card .thumb{height:118px} .lib-card .thumb img{max-height:90px} }
+  .lib-card .body{padding:14px 15px 15px; display:flex; flex-direction:column; gap:7px; flex:1; border-top:1px solid var(--border)}
+  .lib-card h3{font-size:16px; font-weight:800; line-height:1.2}
+  .lib-card .d{color:var(--muted); font-size:12.5px; line-height:1.38; flex:1}
+  .lib-card .foot{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:3px}
+  .count{font-size:11px; font-weight:800; color:var(--fg-soft); background:var(--surface-2); border:1px solid var(--border); padding:4px 10px; border-radius:999px; letter-spacing:.02em}
+  .chev{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary);transition:.2s}
+  .lib-card:hover .chev{background:var(--primary); color:#fff; transform:translateX(2px)}
+  .chev svg{width:16px;height:16px}
+  .lock{display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:800; color:var(--gold); background:var(--gold-soft); padding:4px 9px; border-radius:999px; border:1px solid rgba(243,197,108,.3)}
+  .lock svg{width:12px;height:12px}
+  .lib-card.locked .thumb img{filter:drop-shadow(0 10px 18px rgba(0,0,0,.4)) saturate(.7) opacity(.78)}
+  .plan-flag{position:absolute; top:10px; right:10px; z-index:2; font-size:9.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:4px 8px; border-radius:999px; background:rgba(12,14,36,.72); backdrop-filter:blur(6px); border:1px solid var(--border)}
+  .plan-flag.c{color:var(--gold)} .plan-flag.b{color:var(--mint)}
+
+  /* ---- Detail screen ---- */
+  .backbtn{display:inline-flex; align-items:center; gap:7px; background:none; border:0; color:var(--primary); font-weight:700; font-size:14px; cursor:pointer; padding:16px 0 8px}
+  .backbtn:hover{color:var(--lavender)}
+  .backbtn svg{width:18px;height:18px}
+  .detail-hero{position:relative; overflow:hidden; display:flex; gap:20px; align-items:center; border:1px solid var(--border-hi); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); margin-bottom:6px;
+    background:linear-gradient(130deg, var(--acc-wash), var(--surface) 60%)}
+  .detail-hero .dh-art{flex:none; width:148px; display:grid; place-items:center; position:relative}
+  .detail-hero .dh-art::before{content:""; position:absolute; inset:-10px; background:radial-gradient(90px 80px at 50% 50%, var(--acc-glow), transparent 72%)}
+  .detail-hero .dh-art img{position:relative; width:100%; max-height:150px; object-fit:contain; filter:drop-shadow(0 16px 26px rgba(0,0,0,.45))}
+  .detail-hero .dh-txt{min-width:0; flex:1}
+  .detail-hero h2{font-size:23px; font-weight:800}
+  .detail-hero p{margin:7px 0 0; color:var(--fg-soft); font-size:14px}
+  .detail-tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:13px}
+  .tag{font-size:11.5px; font-weight:700; padding:6px 11px; border-radius:999px; background:var(--surface-2); color:var(--fg-soft); border:1px solid var(--border)}
+  @media (max-width:600px){
+    .detail-hero{flex-direction:column; text-align:center; gap:10px; padding:20px 18px}
+    .detail-hero .dh-art{width:130px}
+    .detail-hero .detail-tags{justify-content:center}
+    .detail-hero h2{font-size:21px}
+  }
+
+  /* ---- Groups / subcategories ---- */
+  .group{margin-top:22px}
+  .group > h3{font-size:15.5px; font-weight:800; display:flex; align-items:center; gap:9px; margin-bottom:4px}
+  .group > h3 .dot{width:10px;height:10px;border-radius:3px; flex:none}
+  .group > .gd{color:var(--muted); font-size:12.5px; margin:0 0 12px 19px}
+  .mat-list{display:grid; gap:10px}
+  .mat{display:flex; gap:13px; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:15px; padding:13px; box-shadow:0 8px 22px rgba(0,0,0,.25); transition:border-color .16s, transform .16s}
+  .mat:hover{border-color:var(--border-hi); transform:translateX(2px)}
+  .mat .mico{width:42px;height:42px;border-radius:12px; background:var(--primary-soft); color:var(--primary); display:grid; place-items:center; flex:none}
+  .mat .mico svg{width:20px;height:20px}
+  .mat .minfo{flex:1; min-width:0}
+  .mat .minfo b{font-size:14px; font-weight:700; display:block; line-height:1.25}
+  .mat .minfo .meta{font-size:11.5px; color:var(--muted); margin-top:2px}
+  .mat .minfo .desc{font-size:12.5px; color:var(--fg-soft); margin-top:4px; line-height:1.35}
+  .mat-actions{display:flex; gap:7px; flex:none}
+  .mbtn{display:inline-flex; align-items:center; gap:6px; border-radius:11px; padding:9px 12px; font-size:12.5px; font-weight:700; cursor:pointer; border:1px solid var(--border); background:var(--surface-2); color:var(--fg-soft); transition:.15s; white-space:nowrap}
+  .mbtn svg{width:15px;height:15px}
+  .mbtn:hover{border-color:var(--border-hi); color:var(--primary)}
+  .mbtn.dl{background:var(--grad-cta); border:0; color:#fff; box-shadow:0 6px 16px rgba(108,92,231,.4)}
+  .mbtn.dl:hover{filter:brightness(1.06); color:#fff}
+  .fav-btn{background:none;border:0;cursor:pointer;color:var(--muted);padding:6px;border-radius:9px;flex:none;transition:.15s}
+  .fav-btn:hover{color:var(--lavender); transform:scale(1.1)}
+  .fav-btn.on{color:var(--mint)}
+  .fav-btn svg{width:20px;height:20px}
+  @media (max-width:560px){
+    .mat{flex-wrap:wrap}
+    .mat-actions{width:100%; justify-content:flex-start; margin-left:55px}
+  }
+
+  /* ---- Locked / plan notice ---- */
+  .notice{display:flex; gap:13px; background:linear-gradient(135deg,var(--gold-soft),var(--surface) 55%); border:1px solid rgba(243,197,108,.3); border-radius:var(--radius); padding:18px; margin-top:8px}
+  .notice .ni{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#d99f3e);color:#2a1e06;display:grid;place-items:center;flex:none}
+  .notice .ni svg{width:20px;height:20px}
+  .notice b{font-size:14.5px}
+  .notice p{margin:4px 0 0; font-size:13px; color:var(--fg-soft)}
+  .notice .upg{margin-top:11px; display:inline-flex; align-items:center; gap:7px; background:var(--grad-cta); color:#fff; border:0; border-radius:11px; padding:10px 15px; font-weight:700; font-size:13px; cursor:pointer; box-shadow:0 6px 16px rgba(108,92,231,.4)}
+  .notice .upg svg{width:15px;height:15px}
+
+  /* TODO banner (não identificado) */
+  .todo{display:flex; gap:10px; background:var(--surface-2); border:1px dashed rgba(243,197,108,.4); border-radius:15px; padding:14px; font-size:12.5px; color:var(--fg-soft); margin-top:12px}
+  .todo svg{width:17px;height:17px;color:var(--gold);flex:none;margin-top:1px}
+  .todo b{color:var(--fg)}
+
+  /* ---- Empty states ---- */
+  .empty{text-align:center; padding:52px 20px; color:var(--muted)}
+  .empty .ei{width:66px;height:66px;border-radius:20px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;margin:0 auto 14px;color:var(--primary)}
+  .empty .ei svg{width:30px;height:30px}
+  .empty b{display:block;color:var(--fg);font-size:17px;font-family:"Plus Jakarta Sans",sans-serif;margin-bottom:6px}
+  .empty p{margin:0 auto;max-width:34ch;font-size:13.5px}
+
+  /* ---- Account ---- */
+  .acc-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:14px}
+  .acc-card h3{font-size:15px; font-weight:800; margin-bottom:12px}
+  .acc-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; border-top:1px solid var(--border)}
+  .acc-row:first-of-type{border-top:0}
+  .acc-row .lab{font-size:13.5px;color:var(--muted)}
+  .acc-row .val{font-size:13.5px;font-weight:700; text-align:right}
+  .plan-pick{display:grid; gap:12px; grid-template-columns:1fr 1fr}
+  @media (max-width:460px){.plan-pick{grid-template-columns:1fr}}
+  .plan-opt{text-align:left; border:2px solid var(--border); border-radius:15px; padding:15px; cursor:pointer; background:var(--surface-2); transition:.16s}
+  .plan-opt:hover{border-color:var(--border-hi)}
+  .plan-opt.sel{border-color:var(--primary); background:linear-gradient(135deg,var(--primary-soft),var(--surface-2))}
+  .plan-opt .pn{font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:space-between; gap:8px}
+  .plan-opt .pp{font-size:22px; font-weight:800; color:var(--primary); margin:7px 0 2px; font-family:"Plus Jakarta Sans",sans-serif}
+  .plan-opt .px{font-size:11.5px; color:var(--muted); line-height:1.4}
+  .check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:grid;place-items:center;color:#fff;flex:none}
+  .plan-opt.sel .check{background:var(--primary);border-color:var(--primary)}
+  .plan-opt.sel .check svg{width:12px;height:12px}
+  .plan-opt:not(.sel) .check svg{display:none}
+
+  /* ---- Bottom nav ---- */
+  nav.tabbar{position:fixed; left:0; right:0; bottom:0; z-index:55; background:rgba(12,14,36,.82); backdrop-filter:blur(16px); border-top:1px solid var(--border);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    padding-left:max(0px,env(safe-area-inset-left,0px)); padding-right:max(0px,env(safe-area-inset-right,0px))}
+  .tabbar-in{max-width:var(--maxw); margin:0 auto; display:flex; justify-content:space-around}
+  .tab{flex:1; background:none; border:0; cursor:pointer; padding:10px 4px 9px; display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--muted); font-size:10.5px; font-weight:600; transition:.15s; position:relative}
+  .tab svg{width:22px;height:22px}
+  .tab:hover{color:var(--fg-soft)}
+  .tab.active{color:var(--primary)}
+  .tab.active::before{content:"";position:absolute;top:0;width:28px;height:3px;border-radius:0 0 4px 4px;background:var(--primary); box-shadow:0 0 12px var(--primary)}
+
+  /* ---- Toast ---- */
+  .toast{position:fixed; left:50%; bottom:calc(92px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%) translateY(20px); background:#242963; color:#fff; padding:12px 18px; border-radius:13px; font-size:13px; font-weight:600; box-shadow:0 14px 34px rgba(0,0,0,.5); border:1px solid var(--border-hi); opacity:0; pointer-events:none; transition:.28s; z-index:80; max-width:90vw; text-align:center}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  /* ---- Access granted overlay ---- */
+  .overlay{position:fixed; inset:0; z-index:100; background:rgba(8,9,24,.72); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; padding:22px}
+  .overlay.show{display:flex; animation:fade .3s}
+  .modal{background:linear-gradient(160deg,#1b1f48,#14163a); border:1px solid var(--border-hi); border-radius:24px; max-width:390px; width:100%; padding:30px 24px; text-align:center; box-shadow:0 40px 90px rgba(0,0,0,.6); animation:pop .42s cubic-bezier(.2,.9,.3,1.2)}
+  @keyframes pop{from{transform:scale(.88);opacity:0} to{transform:scale(1);opacity:1}}
+  .modal .seal{width:76px;height:76px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,var(--mint),#2fb98a);display:grid;place-items:center;color:#06281c;box-shadow:0 12px 30px rgba(91,224,173,.45)}
+  .modal .seal svg{width:38px;height:38px}
+  .modal h3{font-size:21px; font-weight:800}
+  .modal p{color:var(--fg-soft); font-size:14px; margin:10px 0 20px}
+  .modal button{width:100%; background:var(--grad-cta); color:#fff; border:0; border-radius:14px; padding:15px; font-weight:800; font-size:15px; cursor:pointer; box-shadow:0 10px 26px rgba(108,92,231,.45)}
+
+  .foot-note{text-align:center; color:var(--muted); font-size:11.5px; padding:26px 0 10px; line-height:1.5}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important}
+    .lib-card:hover,.banner:hover,.start:hover,.mat:hover{transform:none}
+    .lib-card:hover .thumb img{transform:none}
+  }
+</style>
+
+</head>
+<body>
+
+<!-- ======================= HEADER ======================= -->
+<header class="app">
+  <div class="wrap head-row">
+    <button class="brand" onclick="go('home')" aria-label="Início">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+      <span class="txt"><b>Central Psicopedagógica</b><span>Minha biblioteca digital</span></span>
+    </button>
+    <div class="head-spacer"></div>
+    <span id="planChip" class="plan-chip">Apostila</span>
+    <button class="iconbtn" onclick="go('conta')" aria-label="Minha conta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<!-- ======================= BOTTOM NAV ======================= -->
+<nav class="tabbar">
+  <div class="tabbar-in">
+    <button class="tab" data-tab="home" onclick="go('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Início</button>
+    <button class="tab" data-tab="biblioteca" onclick="go('biblioteca')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11v15H6a2 2 0 0 1-2-2z"/><path d="M15 5h5v12a3 3 0 0 0-3 3h-2z"/></svg>Biblioteca</button>
+    <button class="tab" data-tab="favoritos" onclick="go('favoritos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.5 12 20 12 20z"/></svg>Favoritos</button>
+    <button class="tab" data-tab="conta" onclick="go('conta')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Conta</button>
+  </div>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<!-- Access granted overlay -->
+<div id="overlay" class="overlay">
+  <div class="modal">
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h3>Seu acesso está liberado!</h3>
+    <p>Parabéns pela sua compra! Agora você já pode explorar os materiais disponíveis no seu pacote. Comece pela Apostila Completa e descubra como aproveitar cada recurso da sua biblioteca.</p>
+    <button onclick="closeOverlay()">Explorar minha biblioteca</button>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   ÍCONES (SVG inline)
+   ================================================================ */
+const IC = {
+  book:'<path d="M4 5h11v15H6a2 2 0 0 1-2-2z"/><path d="M15 5h5v12a3 3 0 0 0-3 3h-2z"/>',
+  map:'<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14"/><path d="M15 6v14"/>',
+  pencil:'<path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/>',
+  calc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M16 15h0M8 18h2"/>',
+  brain:'<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-1 5 3 3 0 0 0 1 5 3 3 0 0 0 3 3V4z"/><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 1 5 3 3 0 0 1-1 5 3 3 0 0 1-3 3V4z"/>',
+  list:'<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
+  clipboard:'<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 10h6M9 14h4"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>',
+  download:'<path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',
+  back:'<path d="M15 6l-6 6 6 6"/>',
+  heart:'<path d="M12 20s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.5 12 20 12 20z"/>',
+  lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>',
+  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>',
+  shield:'<path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4"/>',
+  chat:'<path d="M4 5h16v11H9l-4 4V5z"/><path d="M8 10h8M8 13h5"/>',
+  smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  abc:'<path d="M4 16l2-6 2 6M4.7 14h2.6M11 16V9h2a2 2 0 1 1 0 4h-2m0 0h2.3a2 2 0 1 1 0 4H11M18 10a3 3 0 1 0 0 4"/>',
+  puzzle:'<path d="M3 8h3a2 2 0 1 1 4 0h3v3a2 2 0 1 1 0 4v3H10a2 2 0 1 0-4 0H3v-3a2 2 0 1 0 0-4z"/>',
+  hand:'<path d="M8 11V5a1.5 1.5 0 0 1 3 0v5m0-1V4a1.5 1.5 0 0 1 3 0v6m0-2a1.5 1.5 0 0 1 3 0v6a6 6 0 0 1-6 6h-1a5 5 0 0 1-4-2l-3-4a1.5 1.5 0 0 1 2.3-2L8 14"/>',
+  flow:'<rect x="4" y="3" width="7" height="5" rx="1"/><rect x="13" y="9.5" width="7" height="5" rx="1"/><rect x="4" y="16" width="7" height="5" rx="1"/><path d="M7.5 8v8M11 18.5h2a2 2 0 0 0 2-2v-2"/>',
+  gamepad:'<path d="M6 11h4M8 9v4"/><circle cx="15.5" cy="10.5" r="1"/><circle cx="18" cy="13" r="1"/><rect x="2" y="6" width="20" height="12" rx="4"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+};
+function svg(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(IC[name]||IC.book)+'</svg>';}
+
+/* ================================================================
+   DADOS DO ACERVO (fiéis ao raio-x)
+   plan: 'basic' = incluído na Apostila (R$10) e no Combo.
+         'combo' = somente Combo Profissional (R$27,97).
+   img  = ilustração 3D local (object-fit:contain, fundo transparente)
+   file: null => // COLAR LINK REAL AQUI
+   ================================================================ */
+const SECTIONS = [
+  {
+    id:'apostila', plan:'basic', icon:'book', color:'#7C83F3', img:'img/apostila.png',
+    title:'Apostila Completa', short:'Testes e protocolos para avaliação e intervenção.',
+    desc:'Consulte testes, protocolos e orientações para avaliação e intervenção psicopedagógica.',
+    count:'127 páginas', tags:['PDF','+50 testes','127 páginas','Teórico e prático'],
+    mainFile:{ name:'Apostila Completa de Avaliação e Intervenção Psicopedagógica 2026', meta:'PDF • 127 páginas • +50 testes', desc:'Material principal, teórico e prático, para avaliação e intervenção.', file:null /* COLAR LINK REAL AQUI */ },
+    groups:[
+      { name:'A. Processo de Avaliação', dotc:'#7C83F3', desc:'Anamnese, organização inicial, áreas avaliativas e protocolos.', items:[
+        {name:'Áreas avaliativas completas', meta:'Orientações detalhadas por etapa', desc:'Orientações para cada etapa do processo diagnóstico.', file:null},
+        {name:'Anamnese e organização inicial', meta:'Protocolo de entrada', desc:'Estrutura para iniciar a avaliação a partir da queixa.', file:null},
+        {name:'Protocolos de avaliação', meta:'Instrumentos organizados', desc:'Protocolos para consulta durante o atendimento.', file:null},
+      ]},
+      { name:'B. Testes e Instrumentos', dotc:'#9A86F5', desc:'Atenção, memória, leitura, escrita, matemática e consciência fonológica.', items:[
+        {name:'Avaliação de leitura e escrita', meta:'Testes padronizados + protocolos de análise', desc:'Testes padronizados e critérios de análise, conforme anunciado.', file:null},
+        {name:'Atenção e memória', meta:'Instrumentos validados', desc:'Instrumentos voltados à identificação de dificuldades.', file:null},
+        {name:'Bateria para dislexia, discalculia e disgrafia', meta:'Testes de aprendizagem', desc:'Bateria para identificação de transtornos de aprendizagem.', file:null},
+        {name:'Consciência fonológica', meta:'Atividades + critérios de análise', desc:'Atividades práticas e critérios de análise.', file:null},
+      ]},
+      { name:'C. Registros e Devolutivas', dotc:'#5BE0AD', desc:'Documentos administrativos, modelos e fichas de acompanhamento.', items:[
+        {name:'Documentos administrativos psicopedagógicos', meta:'Uso clínico e institucional', desc:'Documentos prontos para uso clínico e institucional.', file:null},
+        {name:'Modelos de devolutiva', meta:'Editáveis para pais e escola', desc:'Modelos de devolutiva completos e editáveis.', file:null},
+        {name:'Fichas de acompanhamento e frequência', meta:'Registro profissional contínuo', desc:'Fichas e formulários para registro profissional.', file:null},
+      ]},
+      { name:'D. Intervenções e Encaminhamentos', dotc:'#F3C56C', desc:'Orientações, planejamento e acompanhamento de intervenções.', items:[
+        {name:'Encaminhamento para próximos passos', meta:'Orientações de intervenção', desc:'Orientações claras para processos de intervenção.', file:null},
+        {name:'Planejamento de intervenção', meta:'Plano direcionado', desc:'Transforme os achados em um plano de intervenção.', file:null},
+        {name:'Acompanhamento da evolução', meta:'Registro e revisão', desc:'Acompanhe avanços ao longo dos atendimentos.', file:null},
+      ]},
+    ]
+  },
+  {
+    id:'guia', plan:'combo', icon:'map', color:'#5BE0AD', img:'img/guia.png',
+    title:'Guia Prático 2026', short:'Mapas, fluxos e checklists para consulta rápida.',
+    desc:'Encontre mapas, fluxos e checklists para consultar durante suas avaliações.',
+    count:'30+ páginas', tags:['30+ páginas visuais','Mapas mentais','Fluxos','Checklists'],
+    mainFile:{ name:'Guia Prático da Avaliação Psicopedagógica 2026', meta:'Material visual • 30+ páginas', desc:'Da queixa inicial ao plano de intervenção — para consulta rápida.', file:null },
+    groups:[
+      { name:'Mapas por área', dotc:'#5BE0AD', desc:'Abra o guia, encontre o mapa certo e veja o próximo passo.', items:[
+        {name:'Funções Executivas', meta:'Mapa de consulta', icon:'brain', file:null},
+        {name:'Leitura', meta:'Mapa de consulta', icon:'book', file:null},
+        {name:'Escrita', meta:'Mapa de consulta', icon:'pencil', file:null},
+        {name:'Matemática', meta:'Mapa de consulta', icon:'calc', file:null},
+        {name:'TEA', meta:'Sinais e observação', icon:'puzzle', file:null},
+        {name:'TDAH', meta:'Sinais e observação', icon:'target', file:null},
+        {name:'Hipóteses', meta:'Organização sem precipitar conclusões', icon:'list', file:null},
+        {name:'Plano de Intervenção', meta:'Da avaliação à ação', icon:'flow', file:null},
+      ]},
+    ],
+    note:'Além dos 8 mapas acima, a oferta cita “+ diversos outros mapas, fluxos e checklists”. Cadastre-os aqui quando tiver os arquivos. <!-- TROCAR: demais mapas do Guia -->'
+  },
+  {
+    id:'kit', plan:'combo', icon:'grid', color:'#6FD0C4', img:'img/kit.png',
+    title:'Kit Visual', short:'Hábitos, comunicação, emoções e regulação.',
+    desc:'Explore recursos de hábitos, comunicação, emoções e autorregulação.',
+    count:'Imprimível', tags:['Material visual','Pronto para imprimir','Consulta rápida'],
+    mainFile:{ name:'Kit Visual de Hábitos, Comunicação e Regulação', meta:'Material visual imprimível', desc:'Recursos para rotina, comunicação, emoções, transições e observação.', file:null },
+    groups:[
+      { name:'Rotinas', dotc:'#5BE0AD', items:[
+        {name:'Rotina visual', meta:'Organizar tarefas e atividades', icon:'calendar', file:null},
+      ]},
+      { name:'Comunicação', dotc:'#7C83F3', items:[
+        {name:'Cartões de necessidades e escolhas', meta:'Apoio à comunicação', icon:'chat', file:null},
+        {name:'Comunicação funcional', meta:'Apoio à expressão', icon:'chat', file:null},
+      ]},
+      { name:'Emoções e Regulação', dotc:'#9A86F5', items:[
+        {name:'Cantinho calmo', meta:'Recursos de regulação', icon:'smile', file:null},
+        {name:'Emoções e autorregulação', meta:'Identificação e regulação', icon:'smile', file:null},
+        {name:'Transições e previsibilidade', meta:'Apoio a mudanças de rotina', icon:'arrow', file:null},
+      ]},
+      { name:'Observação', dotc:'#F3C56C', items:[
+        {name:'Registro de observação', meta:'Comportamentos e avanços', icon:'clipboard', file:null},
+      ]},
+      { name:'Orientações Práticas', dotc:'#7C83F3', items:[
+        {name:'Mapas e orientações práticas', meta:'Consulta e aplicação orientada', icon:'map', file:null},
+      ]},
+    ],
+    note:'Formatos, dimensões, quantidade de cartões e nº total de páginas: NÃO IDENTIFICADO — definir manualmente. <!-- TROCAR: metadados do Kit Visual -->'
+  },
+  {
+    id:'drive', plan:'combo', icon:'download', color:'#6C8DF6', img:'img/drive.png',
+    title:'Drive Profissional', short:'Instrumentos, escalas, documentos e intervenção.',
+    desc:'Acesse instrumentos, documentos e materiais organizados para sua prática profissional.',
+    count:'Bônus 1', tags:['Instrumentos','Escalas','Documentos editáveis','Intervenção'],
+    mainFile:null,
+    groups:[
+      { name:'Grupo 1 — Rastreamento e Triagem Clínica', dotc:'#6C8DF6', desc:'Tudo o que você precisa para identificar.', items:[
+        {name:'Dislexia', meta:'Rastreio clínico', file:null},
+        {name:'Disgrafia', meta:'Rastreio clínico', file:null},
+        {name:'Disortografia', meta:'Rastreio clínico', file:null},
+        {name:'Discalculia', meta:'Rastreio clínico', file:null},
+        {name:'TDAH', meta:'Rastreio clínico', file:null},
+        {name:'PEI e PDI', meta:'Planos individualizados', file:null},
+        {name:'Checklists clínicos', meta:'Instrumentos de triagem', file:null},
+        {name:'Protocolos de rastreio', meta:'Instrumentos de triagem', file:null},
+        {name:'Escalas específicas', meta:'Instrumentos de triagem', file:null},
+        {name:'Testes de leitura e escrita', meta:'Instrumentos de triagem', file:null},
+        {name:'Testes de atenção e reconhecimento de palavras', meta:'Instrumentos de triagem', file:null},
+        {name:'Instrumentos práticos de avaliação', meta:'Aplicação direta', file:null},
+      ]},
+      { name:'Grupo 2 — Avaliação Psicopedagógica Completa', dotc:'#9A86F5', desc:'Material para aprofundar a análise.', items:[
+        {name:'Fichas de avaliação psicomotora', meta:'Instrumento profissional', file:null},
+        {name:'Escalas de leitura e escrita', meta:'Instrumento profissional', file:null},
+        {name:'Escalas de reconhecimento de palavras', meta:'Instrumento profissional', file:null},
+        {name:'Escala de avaliação de TDAH', meta:'Instrumento profissional', file:null},
+        {name:'Instrumentos profissionais', meta:'Avaliação aprofundada', file:null},
+      ]},
+      { name:'Grupo 3 — Documentação Profissional (Editável)', dotc:'#5BE0AD', desc:'Modelos prontos em Word — 100% editáveis.', items:[
+        {name:'Modelos de relatórios', meta:'Word editável', file:null},
+        {name:'Fichas de acompanhamento', meta:'Word editável', file:null},
+        {name:'Anamnese completa', meta:'Word editável', file:null},
+        {name:'Documentos para registro profissional', meta:'Word editável', file:null},
+      ]},
+      { name:'Grupo 4 — Intervenção e Apoio Terapêutico', dotc:'#F3C56C', items:[
+        {name:'Guias práticos de intervenção', meta:'Apoio clínico e educacional', file:null},
+        {name:'Exercícios direcionados', meta:'Apoio clínico e educacional', file:null},
+        {name:'Materiais de apoio clínico e educacional', meta:'Aplicação prática', file:null},
+        {name:'Apoio para família e escola', meta:'Orientação multiprofissional', file:null},
+      ]},
+    ],
+    note:'Quantidade exata de arquivos e formatos de todos os itens do Drive: NÃO IDENTIFICADO — confirmar no acervo. <!-- TROCAR: arquivos reais do Drive -->'
+  },
+  {
+    id:'atividades', plan:'combo', icon:'puzzle', color:'#F3B14C', img:'img/atividades.png',
+    title:'1500 Atividades', short:'Recursos pedagógicos para estimulação infantil.',
+    desc:'Encontre atividades pedagógicas para linguagem, raciocínio, alfabetização e outras habilidades.',
+    count:'1.500', tags:['PDF','Bônus 2','1.500 atividades'],
+    mainFile:{ name:'1500 Atividades Infantis em PDF', meta:'PDF • coleção completa', desc:'Coleção de atividades pedagógicas para estimulação infantil.', file:null },
+    groups:[
+      { name:'Áreas da coleção', dotc:'#F3B14C', desc:'Cinco áreas destacadas na oferta.', items:[
+        {name:'Linguagem', meta:'Atividades de estimulação', icon:'chat', file:null},
+        {name:'Raciocínio', meta:'Atividades de estimulação', icon:'brain', file:null},
+        {name:'Alfabetização', meta:'Atividades de estimulação', icon:'abc', file:null},
+        {name:'Coordenação motora', meta:'Atividades de estimulação', icon:'hand', file:null},
+        {name:'Habilidades cognitivas', meta:'Atividades de estimulação', icon:'puzzle', file:null},
+      ]},
+    ],
+    note:'Quantas atividades há por área e se cada atividade é um PDF individual: NÃO IDENTIFICADO — catalogar após acesso ao acervo. <!-- TROCAR: separação das 1.500 atividades -->'
+  },
+  {
+    id:'jogos', plan:'combo', icon:'gamepad', color:'#8B7BF3', img:'img/jogos.png',
+    title:'20 Jogos', short:'Jogos educativos incluídos no combo.',
+    desc:'Explore os jogos educativos disponíveis no seu pacote.',
+    count:'20', tags:['20 jogos','Combo'],
+    mainFile:null,
+    groups:[],
+    todoList:true, // nomes/regras/formatos NÃO IDENTIFICADOS — não inventar
+    note:'Nomes, regras, finalidade e formato dos 20 jogos: NÃO IDENTIFICADO. Não criar jogos fictícios. Cadastre um card por jogo após identificar o acervo real. <!-- TROCAR: os 20 jogos reais -->'
+  },
+  {
+    id:'bonus', plan:'combo', icon:'spark', color:'#A98CF6', img:'img/bonus.png',
+    title:'Bônus Extras', short:'Três materiais complementares sobre autismo.',
+    desc:'Confira os três materiais complementares sobre autismo.',
+    count:'3 guias', tags:['Super Bônus','Autismo'],
+    mainFile:null,
+    groups:[
+      { name:'Super Bônus Exclusivos', dotc:'#A98CF6', items:[
+        {name:'Foco e Concentração no Autismo: 20 Estratégias Comprovadas', meta:'20 estratégias', desc:'Técnicas para ajudar crianças autistas a manter a atenção e lidar com momentos de crise.', icon:'target', file:null},
+        {name:'Guia Zero Comportamentos Críticos no Autismo', meta:'Orientações práticas', desc:'Como prevenir e lidar com comportamentos desafiadores no dia a dia.', icon:'shield', file:null},
+        {name:'Manual Prático do Autismo para Pais e Profissionais', meta:'Guia de acompanhamento', desc:'Compreender e acompanhar o desenvolvimento da criança com mais segurança e empatia.', icon:'book', file:null},
+      ]},
+    ]
+  },
+];
+
+/* ================================================================
+   ESTADO (plano + favoritos) — placeholder salvo no navegador.
+   >>> TROCAR por integração real de acesso/login. <<<
+   ================================================================ */
+const store = {
+  getPlan(){ try{return localStorage.getItem('cp_plan')||'basic'}catch(e){return 'basic'} },
+  setPlan(p){ try{localStorage.setItem('cp_plan',p)}catch(e){} },
+  favs(){ try{return JSON.parse(localStorage.getItem('cp_favs')||'[]')}catch(e){return []} },
+  toggleFav(id){ let f=store.favs(); f.includes(id)?f=f.filter(x=>x!==id):f.push(id); try{localStorage.setItem('cp_favs',JSON.stringify(f))}catch(e){}; return f.includes(id) },
+  seenWelcome(){ try{return localStorage.getItem('cp_welcome')==='1'}catch(e){return true} },
+  markWelcome(){ try{localStorage.setItem('cp_welcome','1')}catch(e){} },
+};
+function hasAccess(sec){ return sec.plan==='basic' || store.getPlan()==='combo'; }
+function matId(secId, name){ return secId+'::'+name; }
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function glow(hex){ return hex+'3a'; }
+function wash(hex){ return hex+'1f'; }
+
+/* ================================================================
+   COMPONENTES DE RENDER
+   ================================================================ */
+function libCard(sec, i, useFullDesc){
+  const acc = hasAccess(sec);
+  const onclick = acc ? `go('sec/${sec.id}')` : `toast('Material do Combo Profissional. Veja em Conta.')`;
+  const desc = useFullDesc ? sec.desc : sec.short;
+  return `<button class="lib-card ${acc?'':'locked'}" style="--acc-glow:${glow(sec.color)};animation-delay:${i*55}ms" onclick="${onclick}" aria-label="${esc(sec.title)}">
+    <span class="plan-flag ${acc?'b':'c'}">${acc?(sec.plan==='basic'?'Apostila':'Combo'):'Combo'}</span>
+    <div class="thumb">
+      <img src="${sec.img}" alt="${esc(sec.title)}" loading="lazy" decoding="async">
+    </div>
+    <div class="body">
+      <h3>${esc(sec.title)}</h3>
+      <div class="d">${esc(desc)}</div>
+      <div class="foot">
+        ${sec.count?`<span class="count">${esc(sec.count)}</span>`:'<span></span>'}
+        ${acc?`<span class="chev">${svg('arrow')}</span>`:`<span class="lock">${svg('lock')}Combo</span>`}
+      </div>
+    </div>
+  </button>`;
+}
+
+function matRow(secId, it, accentColor){
+  const id = matId(secId, it.name);
+  const on = store.favs().includes(id);
+  const ico = it.icon || 'download';
+  const hasFile = !!it.file;
+  return `<div class="mat">
+    <div class="mico" style="background:${wash(accentColor)};color:${accentColor}">${svg(ico)}</div>
+    <div class="minfo">
+      <b>${esc(it.name)}</b>
+      ${it.meta?`<div class="meta">${esc(it.meta)}</div>`:''}
+      ${it.desc?`<div class="desc">${esc(it.desc)}</div>`:''}
+    </div>
+    <button class="fav-btn ${on?'on':''}" aria-label="Favoritar" data-fav="${esc(id)}" onclick="onFav(this,'${esc(id)}')">${svg('heart')}</button>
+    <div class="mat-actions">
+      <button class="mbtn" onclick="openMat('${esc(it.name)}',${hasFile})">${svg('eye')}Ver</button>
+      <!-- COLAR LINK REAL AQUI: data-arquivo identifica o material -->
+      <button class="mbtn dl" data-arquivo="${esc(id)}" onclick="download('${esc(it.name)}',${hasFile})">${svg('download')}Baixar</button>
+    </div>
+  </div>`;
+}
+
+/* ================================================================
+   TELAS
+   ================================================================ */
+function homeHTML(){
+  const cards = SECTIONS.map((s,i)=>libCard(s,i,false)).join('');
+  const finderOpts = [
+    {t:'Instrumentos para avaliação', ic:'clipboard', go:'sec/apostila'},
+    {t:'Um mapa ou checklist', ic:'map', go:'sec/guia'},
+    {t:'Materiais para intervenção', ic:'target', go:'sec/drive'},
+    {t:'Atividades ou recursos visuais', ic:'grid', go:'sec/kit'},
+    {t:'Avaliação e triagem', ic:'search', go:'sec/drive'},
+  ].map(o=>`<button class="finder-btn" onclick="finderGo('${o.go}')"><span class="fi">${svg(o.ic)}</span>${o.t}</button>`).join('');
+
+  return `
+  <h1 class="sr-only">Apostila Completa de Avaliação e Intervenção Psicopedagógica 2026 — sua biblioteca digital</h1>
+
+  <section class="block wrap" style="padding-top:18px">
+    <!-- BANNER PRINCIPAL (img/banner.png) — clicável; não há CTA duplicado -->
+    <button class="banner" onclick="go('biblioteca')" aria-label="Explorar materiais da biblioteca">
+      <img src="img/banner.png" alt="Apostila Completa de Avaliação e Intervenção Psicopedagógica 2026 — com Guia Prático, Kit Visual, 1500 atividades e 20 jogos">
+      <span class="cue">${svg('arrow')} Explorar materiais</span>
+    </button>
+    <div class="searchbar" style="margin-top:16px">
+      ${svg('search')}
+      <input id="homeSearch" placeholder="O que você precisa encontrar hoje?" onfocus="go('biblioteca')" inputmode="search" aria-label="Buscar materiais">
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <button class="start" onclick="go('sec/apostila')">
+      <div class="orb"></div><div class="orb2"></div>
+      <span class="kicker" style="color:rgba(255,255,255,.88)">Comece por aqui</span>
+      <h3 style="margin-top:6px">Encontre o material certo para cada etapa</h3>
+      <p>Conheça a apostila, os mapas e os recursos disponíveis no seu acesso. Abra o guia, encontre o mapa certo e veja o próximo passo.</p>
+      <span class="btn-white">${svg('arrow')} Explorar materiais</span>
+    </button>
+  </section>
+
+  <section class="block wrap">
+    <div class="finder">
+      <h3>O que você precisa hoje?</h3>
+      <p>Um atalho para localizar o recurso certo. Ele não interpreta sintomas nem produz diagnósticos.</p>
+      <div class="finder-grid">${finderOpts}</div>
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <div class="sec-head"><div><span class="kicker">Sua biblioteca</span><h2 style="margin-top:4px">Todos os seus materiais</h2></div></div>
+    <div class="grid">${cards}</div>
+  </section>
+
+  <div class="wrap"><p class="foot-note">O conteúdo tem caráter educativo e complementar e não substitui avaliação, diagnóstico ou conduta profissional.<br>Material protegido por direitos autorais — uso individual e intransferível.</p></div>
+  `;
+}
+
+function bibliotecaHTML(){
+  const cards = SECTIONS.map((s,i)=>libCard(s,i,true)).join('');
+  return `<section class="block wrap">
+    <div class="searchbar" style="margin-top:16px">
+      ${svg('search')}
+      <input id="bibSearch" placeholder="Buscar testes, mapas, atividades..." oninput="liveSearch(this.value)" inputmode="search" aria-label="Buscar materiais">
+    </div>
+    <div id="searchResults"></div>
+    <div id="bibGrid">
+      <div class="sec-head" style="margin-top:20px"><div><span class="kicker">Biblioteca completa</span><h2 style="margin-top:4px">Explore por seção</h2></div></div>
+      <div class="grid">${cards}</div>
+    </div>
+  </section>`;
+}
+
+function sectionHTML(id){
+  const sec = SECTIONS.find(s=>s.id===id);
+  if(!sec) return homeHTML();
+
+  if(!hasAccess(sec)){
+    return `<div class="wrap">
+      <button class="backbtn" onclick="go('home')">${svg('back')} Voltar à biblioteca</button>
+      <div class="detail-hero" style="--acc-glow:${glow(sec.color)};--acc-wash:${wash(sec.color)}">
+        <div class="dh-art"><img src="${sec.img}" alt="${esc(sec.title)}" decoding="async"></div>
+        <div class="dh-txt"><h2>${esc(sec.title)}</h2><p>${esc(sec.desc)}</p></div>
+      </div>
+      <div class="notice">
+        <div class="ni">${svg('lock')}</div>
+        <div><b>Este material faz parte do Combo Profissional Psicopedagógico</b>
+        <p>Consulte os detalhes do seu acesso. Com o Combo você libera o Guia Prático, o Kit Visual, o Drive Profissional, as 1.500 atividades, os jogos e os bônus sobre autismo.</p>
+        <button class="upg" onclick="go('conta')">${svg('arrow')} Ver meu acesso</button></div>
+      </div>
+    </div>`;
+  }
+
+  const tags = (sec.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+  const main = sec.mainFile ? `<div class="group"><h3><span class="dot" style="background:${sec.color}"></span>Material principal</h3>
+    <div class="mat-list">${matRow(sec.id, sec.mainFile, sec.color)}</div></div>` : '';
+
+  const groups = (sec.groups||[]).map(g=>`
+    <div class="group">
+      <h3><span class="dot" style="background:${g.dotc||sec.color}"></span>${esc(g.name)}</h3>
+      ${g.desc?`<p class="gd">${esc(g.desc)}</p>`:''}
+      <div class="mat-list">${g.items.map(it=>matRow(sec.id,it,g.dotc||sec.color)).join('')}</div>
+    </div>`).join('');
+
+  // Jogos: placeholder (não inventar)
+  let jogos='';
+  if(sec.todoList){
+    jogos = `<div class="group"><h3><span class="dot" style="background:${sec.color}"></span>Jogos do combo</h3>
+      <div class="grid" style="margin-top:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+      ${Array.from({length:20}).map((_,i)=>`<div class="lib-card" style="--acc-glow:${glow(sec.color)};cursor:default;animation-delay:${i*30}ms">
+        <div class="thumb" style="height:96px"><div class="mico" style="width:46px;height:46px;background:${wash(sec.color)};color:${sec.color}">${svg('gamepad')}</div></div>
+        <div class="body"><h3 style="font-size:14px">Jogo ${String(i+1).padStart(2,'0')}</h3><div class="d">A definir <!-- TROCAR: nome do jogo --></div></div>
+      </div>`).join('')}
+      </div></div>`;
+  }
+
+  const note = sec.note ? `<div class="todo">${svg('spark')}<div><b>Nota de cadastro:</b> ${sec.note}</div></div>` : '';
+
+  return `<div class="wrap">
+    <button class="backbtn" onclick="go('home')">${svg('back')} Voltar à biblioteca</button>
+    <div class="detail-hero" style="--acc-glow:${glow(sec.color)};--acc-wash:${wash(sec.color)}">
+      <div class="dh-art"><img src="${sec.img}" alt="${esc(sec.title)}" decoding="async"></div>
+      <div class="dh-txt">
+        <h2>${esc(sec.title)}</h2>
+        <p>${esc(sec.desc)}</p>
+        <div class="detail-tags">${tags}</div>
+      </div>
+    </div>
+    ${main}
+    ${groups}
+    ${jogos}
+    ${note}
+    <div style="height:10px"></div>
+  </div>`;
+}
+
+function favoritosHTML(){
+  const favs = store.favs();
+  const all=[];
+  SECTIONS.forEach(sec=>{
+    if(sec.mainFile) all.push({sec, it:sec.mainFile});
+    (sec.groups||[]).forEach(g=>g.items.forEach(it=>all.push({sec, it, g})));
+  });
+  const chosen = all.filter(x=>favs.includes(matId(x.sec.id,x.it.name)) && hasAccess(x.sec));
+  if(!chosen.length){
+    return `<section class="block wrap"><div class="sec-head" style="margin-top:12px"><div><span class="kicker">Acesso rápido</span><h2 style="margin-top:4px">Meus Favoritos</h2></div></div>
+      <div class="empty"><div class="ei">${svg('heart')}</div><b>Favoritos vazios</b><p>Você ainda não salvou nenhum material. Toque no ícone de coração para guardar seus recursos mais utilizados.</p></div></section>`;
+  }
+  const rows = chosen.map(x=>matRow(x.sec.id, x.it, x.sec.color)).join('');
+  return `<section class="block wrap"><div class="sec-head" style="margin-top:12px"><div><span class="kicker">Acesso rápido</span><h2 style="margin-top:4px">Meus Favoritos</h2><p>Salve os recursos mais importantes para acessar sempre que precisar.</p></div></div>
+    <div class="mat-list">${rows}</div></section>`;
+}
+
+function contaHTML(){
+  const plan = store.getPlan();
+  return `<section class="block wrap">
+    <div class="sec-head" style="margin-top:12px"><div><span class="kicker">Perfil, plano e suporte</span><h2 style="margin-top:4px">Minha Conta</h2></div></div>
+
+    <div class="acc-card">
+      <h3>Meu acesso</h3>
+      <!-- PLACEHOLDER: hoje o plano é escolhido aqui e salvo no navegador.
+           TROCAR por verificação real de compra/login. -->
+      <div class="plan-pick">
+        <button class="plan-opt ${plan==='basic'?'sel':''}" onclick="setPlan('basic')">
+          <div class="pn">Apostila Completa <span class="check">${svg('check')}</span></div>
+          <div class="pp">R$ 10<span style="font-size:13px">,00</span></div>
+          <div class="px">Apostila em PDF • +50 testes • protocolos</div>
+        </button>
+        <button class="plan-opt ${plan==='combo'?'sel':''}" onclick="setPlan('combo')">
+          <div class="pn">Combo Profissional <span class="check">${svg('check')}</span></div>
+          <div class="pp">R$ 27<span style="font-size:13px">,97</span></div>
+          <div class="px">Apostila + Guia + Kit + Drive + 1500 atividades + jogos + bônus</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="acc-card">
+      <h3>Informações</h3>
+      <div class="acc-row"><span class="lab">E-mail de acesso</span><span class="val">pereseric.ia@gmail.com <!-- TROCAR: e-mail real do comprador --></span></div>
+      <div class="acc-row"><span class="lab">Plano atual</span><span class="val">${plan==='combo'?'Combo Profissional':'Apostila Completa'}</span></div>
+      <div class="acc-row"><span class="lab">Materiais liberados</span><span class="val">${SECTIONS.filter(hasAccess).length} de ${SECTIONS.length}</span></div>
+      <div class="acc-row"><span class="lab">Acesso</span><span class="val">Vitalício</span></div>
+    </div>
+
+    <div class="acc-card">
+      <h3>Ajuda e suporte</h3>
+      <div class="acc-row"><span class="lab">Dúvidas sobre o material</span><span class="val">@clubinhodafamilia <!-- TROCAR: canal de suporte real --></span></div>
+      <div class="acc-row"><span class="lab">Garantia</span><span class="val">7 dias</span></div>
+    </div>
+    <div style="height:8px"></div>
+  </section>`;
+}
+
+/* ================================================================
+   BUSCA
+   ================================================================ */
+function allMaterials(){
+  const out=[];
+  SECTIONS.forEach(sec=>{
+    if(!hasAccess(sec)) return;
+    if(sec.mainFile) out.push({sec, it:sec.mainFile, cat:'Principal'});
+    (sec.groups||[]).forEach(g=>g.items.forEach(it=>out.push({sec, it, cat:g.name})));
+  });
+  return out;
+}
+function liveSearch(q){
+  q=(q||'').trim().toLowerCase();
+  const box = document.getElementById('searchResults');
+  const grid = document.getElementById('bibGrid');
+  if(box===null){ pendingQuery=q; go('biblioteca'); return; }
+  if(!q){ box.innerHTML=''; if(grid) grid.style.display=''; return; }
+  if(grid) grid.style.display='none';
+  const res = allMaterials().filter(x=>{
+    const hay=(x.it.name+' '+(x.it.meta||'')+' '+(x.it.desc||'')+' '+x.sec.title+' '+x.cat).toLowerCase();
+    return hay.includes(q);
+  });
+  if(!res.length){
+    box.innerHTML=`<div class="empty"><div class="ei">${svg('search')}</div><b>Nada encontrado para “${esc(q)}”</b><p>Tente outro termo como “TDAH”, “leitura”, “anamnese”, “rotina” ou “relatório”.</p></div>`;
+    return;
+  }
+  const rows = res.map(x=>`<div class="mat">
+      <div class="mico" style="background:${wash(x.sec.color)};color:${x.sec.color}">${svg(x.it.icon||x.sec.icon)}</div>
+      <div class="minfo"><b>${esc(x.it.name)}</b><div class="meta">${esc(x.sec.title)} • ${esc(x.cat)}</div></div>
+      <div class="mat-actions"><button class="mbtn" onclick="go('sec/${x.sec.id}')">${svg('arrow')}Abrir</button></div>
+    </div>`).join('');
+  box.innerHTML=`<div class="sec-head" style="margin-top:18px"><h2>${res.length} resultado${res.length>1?'s':''}</h2></div><div class="mat-list">${rows}</div>`;
+}
+let pendingQuery='';
+
+/* ================================================================
+   AÇÕES
+   ================================================================ */
+function onFav(btn, id){
+  const now = store.toggleFav(id);
+  document.querySelectorAll(`[data-fav="${CSS.escape(id)}"]`).forEach(b=>b.classList.toggle('on', now));
+  toast(now?'Salvo nos favoritos':'Removido dos favoritos');
+  if(currentRoute==='favoritos') render();
+}
+function download(name, hasFile){
+  if(hasFile){ toast('Baixando: '+name); /* window.location = url real */ }
+  else toast('Arquivo ainda não conectado — plugue o link real.');
+}
+function openMat(name, hasFile){
+  if(hasFile){ toast('Abrindo: '+name); }
+  else toast('Arquivo ainda não conectado — plugue o link real.');
+}
+function finderGo(route){ toast('Localizando materiais…'); go(route); }
+function setPlan(p){
+  store.setPlan(p); updatePlanChip(); render();
+  toast(p==='combo'?'Combo Profissional ativado':'Plano Apostila ativado');
+}
+function updatePlanChip(){
+  const c=document.getElementById('planChip');
+  if(store.getPlan()==='combo'){ c.innerHTML=svg('spark')+'Combo Profissional'; c.className='plan-chip combo'; }
+  else { c.innerHTML=svg('book')+'Apostila'; c.className='plan-chip'; }
+}
+
+let toastT;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ================================================================
+   ROTEAMENTO (SPA)
+   ================================================================ */
+let currentRoute='home';
+function go(route){
+  currentRoute=route;
+  const base = route.split('/')[0];
+  try{ location.hash = route.replace('/','-'); }catch(e){}
+  render();
+  window.scrollTo({top:0, behavior:'auto'});
+  document.querySelectorAll('.tab').forEach(t=>{
+    const tn=t.dataset.tab;
+    t.classList.toggle('active', tn===base || (base==='sec'&&tn==='biblioteca') || (base==='home'&&tn==='home'));
+  });
+}
+function render(){
+  const app=document.getElementById('app');
+  const base=currentRoute.split('/')[0];
+  let html='';
+  if(base==='home') html=homeHTML();
+  else if(base==='biblioteca') html=bibliotecaHTML();
+  else if(base==='favoritos') html=favoritosHTML();
+  else if(base==='conta') html=contaHTML();
+  else if(base==='sec') html=sectionHTML(currentRoute.split('/')[1]);
+  else html=homeHTML();
+  app.innerHTML=`<div class="screen active">${html}</div>`;
+  if(base==='biblioteca' && pendingQuery){
+    const bs=document.getElementById('bibSearch');
+    if(bs){ bs.value=pendingQuery; liveSearch(pendingQuery); }
+    pendingQuery='';
+  }
+}
+
+function closeOverlay(){ document.getElementById('overlay').classList.remove('show'); store.markWelcome(); }
+
+/* ================================================================
+   INIT
+   ================================================================ */
+(function init(){
+  updatePlanChip();
+  const h=(location.hash||'').replace('#','').replace('-','/');
+  currentRoute = h && (h.startsWith('sec/')||['home','biblioteca','favoritos','conta'].includes(h.split('/')[0])) ? h : 'home';
+  go(currentRoute);
+  if(!store.seenWelcome()){
+    setTimeout(()=>document.getElementById('overlay').classList.add('show'), 650);
+  }
+})();
+window.addEventListener('hashchange',()=>{
+  const h=(location.hash||'').replace('#','').replace('-','/');
+  if(h && h!==currentRoute){ currentRoute=h; render(); }
+});
+</script>
+
+</body>
+</html>
